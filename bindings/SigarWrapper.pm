@@ -2835,13 +2835,9 @@ sub finish {
         next unless $func->{has_get};
         my $arginfo = $func->{num_args} ? 'METH_VARARGS' : 'METH_NOARGS';
         print $cfh qq(    {"$func->{cname}", py$func->{sigar_function}, $arginfo, NULL},);
-        if ($func == $mappings->[-1]) {
-            print $cfh "\n";
-        }
-        else {
-            print $cfh $nl;
-        }
+        print $cfh $nl;
     }
+    print $cfh "\n";
 
     print $cfh "#define PY_SIGAR_ADD_TYPES $nl";
     for my $func (@$mappings) {
